@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container">
+        <div class="booking-form">
+            <h3>Booking Flights</h3>
+            <div class="input-group">
+                <label for="">Flying From</label>
+                <input class="inp-style" type="text" name="" placeholder="Dhake, Bangladesh">
+            </div>
+            <div class="input-group">
+                <label for="">Flying To</label>
+                <input class="inp-style" type="text" name="" placeholder="New York, United States">
+            </div>
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="input-group f-class">
+                <div>
+                    <h5 id="firstClass-total">Fast-Class ($150)</h5>
+                    <input id="firstClass-count" class="inp-style inp-width" type="number" value="0">
+                </div>
+                <div class="input-group number-spinner">
+                    <button onclick="ticketItemChange('firstClass', false)" class="btn btn-default">-</button>
+                    <button onclick="ticketItemChange('firstClass', true)" class="btn btn-default">+</button>
+                </div>
+            </div>
+            
+            <div class="input-group f-class">
+                <div>
+                    <h5 id="economy-total">Economy ($100)</h5>
+                    <input id="economy-count" class="inp-style inp-width" type="number" value="0">
+                </div>
+                <div class="input-group number-spinner">
+                    <button onclick="ticketItemChange('economy', false)" class="btn btn-default"><i class="fas fa-minus"></i>-</button>
+                    <button onclick="ticketItemChange('economy', true)" class="btn btn-default"><i class="fas fa-plus"></i>+</button>
+                </div>
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p id="total-price">$00</p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p id="tax-amount">$50</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p id="grand-total">$0</p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-style">Book Now</button>
+        </div>
+
+        <div class="booking-content">
+            <h1>discover <br> around the world</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicingelit. Provident voluptatibus quam fuga laborumalias veniam libero autem quasi maxime ullam vero nama imi dolor, architecto ab facilis eaque deserunt nobise voluptatibus quam</p>
+        </div>
+    </section>
+
+    <!--Thank You-->
+    <script>
+       function ticketItemChange(ticket, isPlus) {
+            let ticketCount = getInputValue(ticket);
+            let fClassNewCount = ticketCount;
+            if (isPlus == true) {
+                ticketNewCount = ticketCount + 1;
+            }
+            if (isPlus == false && ticketCount > 0) {
+                ticketNewCount = ticketCount - 1;
+            }
+
+            document.getElementById(ticket + '-count').value = ticketNewCount;
+            let ticketTotal = 0;
+            if (ticket == 'firstClass') {
+                tickettTotal = ticketNewCount * 150;
+            }
+            if (ticket == 'economy') {
+                ticketTotal = ticketNewCount * 100;
+            }
+            document.getElementById(ticket + '-total').innerText = '$' + ticketTotal;
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            let fClassInput = getInputValue('firstClass');
+            let economyInput = getInputValue('economy');
+
+            let totalPrice = fClassInput * 150 + economyInput * 100;
+            document.getElementById('total-price').innerText = '$' + totalPrice;
+
+            let tax = totalPrice * 0.1;
+            document.getElementById('tax-amount').innerText = '$' + tax;
+
+            let grandTotal = totalPrice + tax;
+            document.getElementById('grand-total').innerText = '$' + grandTotal;
+        }
+
+        function getInputValue(ticket) {
+            let ticketInput = document.getElementById(ticket + '-count');
+            let ticketCount = parseInt(ticketInput.value);
+            return ticketCount;
+        }
+    </script>)
+</body>
+
+</html>
